@@ -10,6 +10,12 @@ const getAboutPage = (req, res) => {
     });
 }
 
+const getRegisterPage = (req, res) => {
+    res.render("register", {
+        link : "register"
+    });
+}
+
 const getBlogPage = (req, res) => {
     res.render("blog", {
         link : "blog"
@@ -40,4 +46,4 @@ const getServicesPage = (req, res) => {
     });
 }
 
-export { getIndexPage, getAboutPage,getBlogPage,getContactPage, getProjectsPage,getServicesPage };
+export { getIndexPage, getAboutPage,getBlogPage,getContactPage, getProjectsPage,getServicesPage, getRegisterPage };

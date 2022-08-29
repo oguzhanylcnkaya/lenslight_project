@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import conn from './db/db.js'
 import pageRoute from './routes/pageRoute.js'
 import photoRoute from './routes/photoRoute.js'
+import userRoute from './routes/userRoute.js'
 
 //for use dotenv
 dotenv.config();
@@ -22,16 +23,13 @@ app.use(express.static('public'))
 // for read that sending request body
 app.use(express.json())
 
+// for read that sending form on ejs page
+app.use(express.urlencoded({extended : true}))
+
 //routes
 app.use("/", pageRoute)
 app.use("/photos", photoRoute)
-
-// app.get("/", (req,res) => {
-//     // res.send("INDEX 1")
-
-//     //ejs ile html render etmek için
-//     res.render("index")
-// })
+app.use("/users", userRoute)
 
 app.listen(port, () => {
     console.log(`Application running on port ${port}`)

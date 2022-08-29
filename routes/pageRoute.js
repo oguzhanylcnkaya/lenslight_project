@@ -9,5 +9,6 @@ router.route("/contact").get(pageController.getContactPage)
 //router.route("/gallery").get(pageController.getGalleryPage)
 router.route("/projects").get(pageController.getProjectsPage)
 router.route("/services").get(pageController.getServicesPage)
+router.route("/register").get(pageController.getRegisterPage)
 
 export default router
