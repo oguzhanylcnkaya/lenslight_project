@@ -4,6 +4,7 @@ import conn from './db/db.js'
 import pageRoute from './routes/pageRoute.js'
 import photoRoute from './routes/photoRoute.js'
 import userRoute from './routes/userRoute.js'
+import cookieParser from "cookie-parser";
 
 //for use dotenv
 dotenv.config();
@@ -25,6 +26,8 @@ app.use(express.json())
 
 // for read that sending form on ejs page
 app.use(express.urlencoded({extended : true}))
+
+app.use(cookieParser())
 
 //routes
 app.use("/", pageRoute)

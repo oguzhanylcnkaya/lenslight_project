@@ -1,5 +1,6 @@
 import UserModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const createUser = async (req, res) => {
     try {
@@ -35,7 +36,13 @@ const login = async (req, res) => {
         }
 
         if(isPasswordSame){
-            res.status(200).send("You are loggend in")
+            const token = createToken(user._id)
+            res.cookie("token", token, {
+                httpOnly : true,
+                maxAge : 1000 * 60 *60 *24
+            })
+
+            res.redirect("/users/dashboard")
         }
         else{
             res.status(401).json({
@@ -52,4 +59,16 @@ const login = async (req, res) => {
     }
 }
 
-export {createUser, login}
+const createToken = (userId) => {
+    return jwt.sign({userId}, process.env.JWT_SECRET_KEY, {
+        expiresIn : "1d"
+    })
+}
+
+const getDashboardPage = (req, res) => {
+    res.render("dashboard", {
+        link : "dashboard"
+    })
+}
+
+export {createUser, login, getDashboardPage}
