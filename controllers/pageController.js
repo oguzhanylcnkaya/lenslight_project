@@ -52,4 +52,11 @@ const getServicesPage = (req, res) => {
     });
 }
 
-export { getIndexPage, getAboutPage,getBlogPage,getContactPage, getProjectsPage,getServicesPage, getRegisterPage, getLoginPage };
+const getLogout = (req, res) => {
+    res.cookie('token', '', {
+        maxAge : 1,
+    });
+    res.redirect("/")
+}
+
+export { getIndexPage, getAboutPage,getBlogPage,getContactPage, getProjectsPage,getServicesPage, getRegisterPage, getLoginPage,getLogout };

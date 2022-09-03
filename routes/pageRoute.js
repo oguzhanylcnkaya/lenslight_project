@@ -13,5 +13,6 @@ router.route("/projects").get(pageController.getProjectsPage)
 router.route("/services").get(pageController.getServicesPage)
 router.route("/register").get(pageController.getRegisterPage)
 router.route("/login").get(pageController.getLoginPage)
+router.route("/logout").get(pageController.getLogout)
 
 export default router

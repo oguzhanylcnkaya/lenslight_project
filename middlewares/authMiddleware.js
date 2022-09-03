@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import UserModel from "../models/userModel.js";
 
 const authenticateToken = async (req, res, next) => {
 
@@ -30,5 +31,32 @@ const authenticateToken = async (req, res, next) => {
 
 }
 
+const checkUser = async (req, res, next) => {
+    try {
+        const token = req.cookies.token;
 
-export { authenticateToken }
+        if(token){
+            jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
+                if(err){
+                    res.locals.user = null
+                    next()
+                }
+                else{
+                    const user = await UserModel.findById(decoded.userId)
+                    res.locals.user = user
+                    next()
+                }
+            })
+        }
+        else{
+            res.locals.user = null
+            next()
+        }
+        
+    } catch (error) {
+        
+    }
+}
+
+
+export { authenticateToken, checkUser }

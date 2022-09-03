@@ -5,11 +5,7 @@ import jwt from "jsonwebtoken";
 const createUser = async (req, res) => {
     try {
         const user = await UserModel.create(req.body)
-        res.status(201).json({
-            succeded: true,
-            user,
-            message : "The user was created successfully!"
-        })
+        res.redirect("/login")
     } catch (error) {
         res.status(500).json({
             succeded: false,
@@ -70,5 +66,7 @@ const getDashboardPage = (req, res) => {
         link : "dashboard"
     })
 }
+
+
 
 export {createUser, login, getDashboardPage}
