@@ -32,7 +32,7 @@ app.use(cookieParser())
 
 //routes
 
-app.get("*", checkUser)
+app.use("*", checkUser)
 
 app.use("/", pageRoute)
 app.use("/photos", photoRoute)

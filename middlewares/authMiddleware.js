@@ -10,7 +10,6 @@ const authenticateToken = async (req, res, next) => {
             jwt.verify(token, process.env.JWT_SECRET_KEY, (err) => {
 
                 if(err){
-                    console.log("error", err.message)
                     res.redirect("/login")
                 }else{
                     next()
